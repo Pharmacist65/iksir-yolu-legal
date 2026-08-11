@@ -1,0 +1,10 @@
+{
+  "name": "iksir-yolu-legal-pages",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node --test tests/site.test.mjs",
+    "test": "node --test tests/site.test.mjs"
+  }
+}
+
