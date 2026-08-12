@@ -55,19 +55,20 @@ for (const file of htmlFiles) {
   });
 }
 
-test("privacy copy matches the current offline no-data build", async () => {
+test("privacy copy matches the RevenueCat lifetime-purchase build", async () => {
   const privacy = await source("privacy.html");
-  assert.match(privacy, /uygulama veri toplamaz/i);
-  assert.match(privacy, /the app does not collect data/i);
-  assert.match(privacy, /reklam, izleme, abonelik veya uygulama içi satın alma bulunmaz/i);
-  assert.match(privacy, /no ads, tracking, subscriptions, or in-app purchases/i);
-  assert.doesNotMatch(privacy, /RevenueCat|AdMob|Google Mobile Ads|Firebase/i);
+  assert.match(privacy, /satın alma geçmişi/i);
+  assert.match(privacy, /purchase history/i);
+  assert.match(privacy, /RevenueCat/i);
+  assert.match(privacy, /anonim uygulama kimliği/i);
+  assert.match(privacy, /anonymous app identifier/i);
+  assert.doesNotMatch(privacy, /AdMob|Google Mobile Ads|Firebase/i);
 });
 
 test("marketing page describes the current edition truthfully in both languages", async () => {
   const game = await source("game.html");
-  assert.match(game, /çevrimdışı · hesap yok · reklam yok · uygulama içi satın alma yok/i);
-  assert.match(game, /offline · no account · no ads · no in-app purchases/i);
+  assert.match(game, /ilk vaka ücretsiz · Tam Yolculuk tek seferlik satın alma/i);
+  assert.match(game, /first case free · one-time Full Journey unlock/i);
   assert.match(game, /data-language-button="tr"/);
   assert.match(game, /data-language-button="en"/);
   assert.match(game, /https:\/\/cihangirakman\.com\//);
@@ -84,4 +85,3 @@ test("canonical URLs are unique and anchored to the intended Pages project", asy
   }
   assert.equal(new Set(canonicals).size, htmlFiles.length);
 });
-
